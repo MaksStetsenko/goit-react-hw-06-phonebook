@@ -22,13 +22,13 @@ const PhonebookEditor = () => {
   const dispatch = useDispatch();
   const { contacts } = useSelector(getContacts);
 
-  const contactExist = name => {
-    return contacts.find(({ nameForSearch }) => nameForSearch === name);
+  const isContactExist = abonentName => {
+    return contacts.find(({ name }) => name === abonentName);
   };
 
-  const handelSubmit = ({ name, phone }, { resetForm }) => {
-    if (contactExist(name)) {
-      alert(`${name} is alredy in list`);
+  const handleSubmit = ({ name, phone }, { resetForm }) => {
+    if (isContactExist(name)) {
+      alert(`${name} is already in list`);
       return;
     }
 
@@ -40,7 +40,7 @@ const PhonebookEditor = () => {
   return (
     <Formik
       initialValues={initialValue}
-      onSubmit={handelSubmit}
+      onSubmit={handleSubmit}
       validationSchema={validationShema}
     >
       <Form>
